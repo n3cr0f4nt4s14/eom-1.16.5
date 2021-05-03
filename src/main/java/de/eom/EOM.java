@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package de.eom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -16,16 +16,22 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.eom.init.EOMBlocks;
+
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod("examplemod")
-public class ExampleMod
+@Mod(EOM.MODID)
+public class EOM
 {
-    // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
+    
+    /**
+     * The modid.<br>
+     * Don't forget to change the "mods.toml" file.
+     */
+    public static final String MODID = "eom";
 
-    public ExampleMod() {
+    public EOM() {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -37,6 +43,8 @@ public class ExampleMod
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        
+        EOMBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void setup(final FMLCommonSetupEvent event)
